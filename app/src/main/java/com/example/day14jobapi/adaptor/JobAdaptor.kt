@@ -12,6 +12,7 @@ import com.example.day14jobapi.R
 import com.example.day14jobapi.databinding.JobRecyclerBinding
 import com.example.day14jobapi.model.JobResponse
 import com.example.day14jobapi.view.MainActivity
+import com.example.day14jobapi.view.SearchFragment
 
 class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAdaptor.JobViewHolder>() {
 
@@ -104,7 +105,9 @@ class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAda
             jobResponseList[position].company_url,
             jobResponseList[position].title,
             jobResponseList[position].location,
-            jobResponseList[position].description)
+            jobResponseList[position].description,
+            jobResponseList[position].how_to_apply
+            )
     }
 
     class JobViewHolder(private val binding: JobRecyclerBinding ) :
@@ -146,9 +149,9 @@ class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAda
                 .into(binding.logoImage)
         }
 
-        fun jobIntentForFragment(createdAt: String, type: String, jobUrl: String, company: String, companyUrl: String, title: String, location: String, description : String){
+        fun jobIntentForFragment(createdAt: String, type: String, jobUrl: String, company: String, companyUrl: String, title: String, location: String, description : String, how_to_apply:String){
 
-            val intent = Intent(binding.root.context,MainActivity::class.java)
+            val intent = Intent(binding.root.context,SearchFragment::class.java)
             intent.putExtra("title", title)
             intent.putExtra("createdAt",createdAt)
             intent.putExtra("type",type)
@@ -156,7 +159,10 @@ class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAda
             intent.putExtra("company",company)
             intent.putExtra("location",location)
             intent.putExtra("description",description)
-            //startActivity(binding.root.context)
+            intent.putExtra("companyUrl",companyUrl)
+            intent.putExtra("how_to_apply",how_to_apply)
+
+            startActivity(binding.root.context)
 
 
         }
@@ -180,8 +186,8 @@ class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAda
 
                 if (view.id == R.id.button){
 
-                    val intent = Intent(binding.root.context,MainActivity::class.java)
-                        //startActivity(intent)
+                    val intent = Intent(binding.root.context,SearchFragment::class.java)
+                    startActivity(intent)
                 }
 
 

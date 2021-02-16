@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.day14jobapi.R
+import com.example.day14jobapi.databinding.FragmentFullDetailBinding
 import com.example.day14jobapi.databinding.FragmentSearchBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -13,17 +14,21 @@ import com.example.day14jobapi.databinding.FragmentSearchBinding
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+
 /**
  * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
+ * Use the [FullDetailFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchFragment : Fragment() {
+class FullDetailFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var binding: FragmentSearchBinding
+
+    private lateinit var binding: FragmentFullDetailBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,15 +39,10 @@ class SearchFragment : Fragment() {
     }
 
     override fun onCreateView(
-        // Inflate the layout for this fragment
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ) = FragmentSearchBinding.inflate(inflater,container,false)
+    ): = FragmentFullDetailBinding.inflate(inflater,container,false)
         .also { binding = it}.root
-
-
-
-
 
 
     companion object {
@@ -52,12 +52,12 @@ class SearchFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
+         * @return A new instance of fragment FullDetailFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: String) =
-            SearchFragment().apply {
+        fun newInstance(param1: String, param2: String) =
+            FullDetailFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

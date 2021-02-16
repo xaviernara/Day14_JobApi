@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.SearchFragment"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
 
     <EditText
         android:id="@+id/descriptionText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:layout_weight="1"
+        android:layout_below="@id/toolbar"
         android:text="Description" />
 
 
     <EditText
         android:id="@+id/locationText"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
         android:inputType="textPersonName"
-        android:layout_weight="1"
+        android:layout_alignParentEnd="true"
         android:text="Location" />
 
     <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_weight="1" >
-
-
+        android:layout_below="@+id/descriptionText"
+        >
         <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +45,35 @@
             android:id="@+id/part"
             android:layout_weight=".5"
             android:text="Part Time" />
-
-
     </RadioGroup>
-</LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="Search" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        tools:listitem="@layout/job_recycler"
+        android:layout_below="@id/radioGroup"
+        android:layout_above="@+id/button2"
+        />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="50dp"
+        android:tooltipText="@string/app_name"
+         />
+
+
+
+
+</RelativeLayout>
