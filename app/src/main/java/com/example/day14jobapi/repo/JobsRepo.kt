@@ -7,7 +7,7 @@ object JobsRepo {
 
     val jobService : RetrofitInstance.jobService
 
-    suspend fun getJobs (description: String, location: String, full_time:Boolean) : List<JobResponse> {
+    suspend fun getJobs (description: String, location: String, full_time:Boolean) : JobResponse {
         return RetrofitInstance.jobService.getJobs(description,location,full_time)
     }
 }

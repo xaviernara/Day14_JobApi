@@ -1,13 +1,19 @@
 package com.example.day14jobapi.adaptor
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.day14jobapi.R
 import com.example.day14jobapi.databinding.JobRecyclerBinding
 import com.example.day14jobapi.model.JobResponse
+import com.example.day14jobapi.view.MainActivity
 
-class JobAdaptor(val jobResponseList: List<JobResponse>) : RecyclerView.Adapter<JobAdaptor.JobViewHolder>() {
+class JobAdaptor(val jobResponseList: JobResponse) : RecyclerView.Adapter<JobAdaptor.JobViewHolder>() {
 
     lateinit var binding: JobRecyclerBinding
 
@@ -72,23 +78,86 @@ class JobAdaptor(val jobResponseList: List<JobResponse>) : RecyclerView.Adapter<
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: JobAdaptor.JobViewHolder, position: Int) {
+
+        holder.setTextViews(jobResponseList[position].title,jobResponseList[position].company,jobResponseList[position].location)
+        holder.setImageUrl(jobResponseList[position].company_url)
+
+        /*
+            createdAt: String,
+    type: String,
+    jobUrl: String,
+    company: String,
+    companyUrl: String,
+    title: String,
+    location: String,
+    description: String
+
+
+
+         */
+
+
+        holder.jobIntentForFragment(jobResponseList[position].created_at,
+            jobResponseList[position].type,
+            jobResponseList[position].url,
+            jobResponseList[position].company,
+            jobResponseList[position].company_url,
+            jobResponseList[position].title,
+            jobResponseList[position].location,
+            jobResponseList[position].description)
     }
 
     class JobViewHolder(private val binding: JobRecyclerBinding ) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
 
-        fun setTextViews(title: String, name:String, location:String, companyUrl:String){
 
-            binding.nameText.text = name
+
+
+        fun setTextViews(title: String, company:String, location:String){
+
+            binding.nameText.text = company
             binding.titleText.text = title
             binding.locationText.text = location
-            binding.companyUrlText.text=companyUrl
+
+            initViews()
+
+            //binding.companyUrlText.text= companyUrl
         }
+
+        fun initViews(){
+            binding.button.setOnClickListener(this)
+           /* binding.titleText.setOnClickListener(this)
+            binding.locationText.setOnClickListener(this)*/
+
+            //binding.companyUrlText.setOnClickListener(this)
+
+        }
+
+
 
         fun setImageUrl(logoUrl: String){
 
-            //GlideToVectorYou.justLoadImage(, imageUrl, binding.flagImage);
+            //GlideToVectorYou.justLoadImage(activity, IMAGE_URI, targetImageView)
+            //GlideToVectorYou.justLoadImage(binding.root, logoUrl, binding.flagImage);
+
+           Glide.with(binding.root)
+                .load(logoUrl)
+                .into(binding.logoImage)
+        }
+
+        fun jobIntentForFragment(createdAt: String, type: String, jobUrl: String, company: String, companyUrl: String, title: String, location: String, description : String){
+
+            val intent = Intent(binding.root.context,MainActivity::class.java)
+            intent.putExtra("title", title)
+            intent.putExtra("createdAt",createdAt)
+            intent.putExtra("type",type)
+            intent.putExtra("jobUrl",jobUrl)
+            intent.putExtra("company",company)
+            intent.putExtra("location",location)
+            intent.putExtra("description",description)
+            //startActivity(binding.root.context)
+
 
         }
 
@@ -98,9 +167,27 @@ class JobAdaptor(val jobResponseList: List<JobResponse>) : RecyclerView.Adapter<
          *
          * @param v The view that was clicked.
          */
-        override fun onClick(v: View?) {
+        override fun onClick(view: View?) {
+
+            if (view != null) {
+                /*if (view.id == R.id.companyUrlText){
+                    var intent = Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse(binding.companyUrlText.text.toString())
+                    )
+
+                }*/
+
+                if (view.id == R.id.button){
+
+                    val intent = Intent(binding.root.context,MainActivity::class.java)
+                        //startActivity(intent)
+                }
 
 
+
+
+            }
         }
 
         fun goToLocationOnMap(longitude: Float, latitdue: Float ){

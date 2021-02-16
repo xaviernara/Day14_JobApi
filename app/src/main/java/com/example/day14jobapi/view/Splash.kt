@@ -12,6 +12,8 @@ import com.example.day14jobapi.databinding.ActivitySplashBinding
 class Splash : AppCompatActivity() {
 
 
+
+    //https://levelup.gitconnected.com/a-tutorial-on-building-a-splash-screen-with-kotlin-in-android-studio-dc647cd52f9b
     // This is the loading time of the splash screen
     private val SPLASH_TIME_OUT:Long = 5000 // 4 sec
     private lateinit var  binding : ActivitySplashBinding
@@ -32,12 +34,5 @@ class Splash : AppCompatActivity() {
             finish()
         }, SPLASH_TIME_OUT)
 
-    }
-
-
-
-
-    companion object {
-        private const val SPLASH_SCREEN_TIME_OUT=2000
     }
 }

@@ -7,7 +7,7 @@
 
     <ImageView
         android:id="@+id/logoImage"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         app:srcCompat="@drawable/ic_launcher_background" />
@@ -33,11 +33,18 @@
         android:layout_weight="1"
         android:text="TextView" />
 
-    <TextView
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Full Description" />
+
+    <!--<TextView
         android:id="@+id/companyUrlText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:text="TextView" />-->
 
 </LinearLayout>

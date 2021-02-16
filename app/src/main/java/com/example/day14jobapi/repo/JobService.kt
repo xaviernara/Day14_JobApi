@@ -23,7 +23,17 @@ interface JobService {
     @Get("amount")
 
  */
+
+    /*
+        Ex:
+        description: python
+         location: san francisco
+         full_time: true
+
+
+     */
+
     @GET(" /positions.json")
     suspend fun getJobs(
-        @Query(" description") description: String,@Query(" location") location: String,@Query("full_time") full_time:Boolean ): List<JobResponse>
+        @Query("description") description: String,@Query("location") location: String,@Query("full_time") full_time:Boolean ): JobResponse
 }
